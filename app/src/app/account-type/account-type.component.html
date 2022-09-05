@@ -1,0 +1,24 @@
+<div>
+  <div class="mb-3 col-md-4 row">
+    <label
+      for="accountTypes"
+      class="col-sm-4 col-form-label label-small"
+      style="margin-left: 5%"
+      >Select Type</label
+    >
+    <select
+      name="accountTypes"
+      id="accountTypes"
+      class="form-select col-sm-10"
+      style="margin-left: 5%"
+      (change)="onChange($event.target.value)"
+    >
+      <option
+        *ngFor="let accountType of accountTypes"
+        [value]="accountType.name"
+      >
+        {{ accountType.name }}
+      </option>
+    </select>
+  </div>
+</div>

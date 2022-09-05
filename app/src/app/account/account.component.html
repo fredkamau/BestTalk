@@ -1,0 +1,37 @@
+<div>
+  <div class="content">
+    <h1 class="cover-heading label-big">Account List</h1>
+    <app-account-type (AccountTypeSelected)="AccountTypeSelected($event)"></app-account-type>
+    <div>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="openNewAccount()"
+        style="margin-left: 85%"
+      >
+        Add
+      </button>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" class="label-small">First Name</th>
+          <th scope="col" class="label-small">Last Name</th>
+          <th scope="col" class="label-small">Account Type</th>
+          <th scope="col" class="label-small">Balance</th>
+          <th scope="col" class="label-small">Address</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let account of accounts">
+        <tr>
+          <!--TODO: Uncomment below-->
+          <td>{{ account.firstName }}</td>
+          <td>{{ account.lastName }}</td>
+          <td>{{ account.accountType}}</td>
+          <td>{{ account.balance}}</td>
+          <td>{{ account.address }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
