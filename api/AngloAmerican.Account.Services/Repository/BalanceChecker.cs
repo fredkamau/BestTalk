@@ -8,10 +8,17 @@ namespace AngloAmerican.Account.Services
     */
     public class BalanceChecker
     {
-        public bool Process(int amount, Notification notification, ExternalApi eA, string lastName)
+        Notification notification = new Notification();
+        ExternalApi eA = new ExternalApi();
+
+        //Abstract the Process Method
+        public bool Process(int amount, string lastName)
         {
             var emailTitle = "";
-            if (DateTime.Now.Day < 15)
+            var emailBody = "<p>Body placeholder<p>";
+            var currentDate = DateTime.Now.Day;
+
+            if (currentDate < 15)
             {
                 emailTitle = "<h1>Info about days till Middle of the month</h1>";
             }
@@ -20,8 +27,8 @@ namespace AngloAmerican.Account.Services
                 emailTitle = "<h1>Info about days till End of the month</h1>";
             }
 
-            var emailBody = "<p>Body placeholder<p>";
-            var m = emailTitle + "\n" + emailBody;
+            
+            var message = emailTitle + "\n" + emailBody;
 
             if (amount < 10000)
             {
@@ -29,7 +36,7 @@ namespace AngloAmerican.Account.Services
             }
             if (amount > 10000)
             {
-                notification.SendMessage(m);
+                notification.SendMessage(message);
                 return eA.CheckAccountBalance(amount, lastName);
             }
 
@@ -54,18 +61,15 @@ namespace AngloAmerican.Account.Services
     // TODO: Improve and make the code more readable.
     public class ExternalApi
     {
-        private List<string> _names = new List<string> {"Rene", "Kirk", "Escarole"};
+        private List<string> lastNames = new List<string> {"Rene", "Kirk", "Escarole"};
 
         // returns true if balance is valid
         public bool CheckAccountBalance(int amount, string lastName)
         {
-            bool isFalse = false;
-
             // if the person is in the list and balance is greater than 10,000 return false
-            foreach (var n in _names)
+            foreach (var lName in lastNames)
             {
-                isFalse = true;
-                if (n == lastName)
+                if (lName == lastName)
                 {
                     if (amount > 10000)
                     {
@@ -76,11 +80,9 @@ namespace AngloAmerican.Account.Services
                         return true;
                     }
                 }
-
-                return isFalse;
             }
 
-            return isFalse;
+            return true;
         }
     }
 }

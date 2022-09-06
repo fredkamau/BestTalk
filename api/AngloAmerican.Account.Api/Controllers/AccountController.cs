@@ -93,11 +93,5 @@ namespace AngloAmerican.Account.Api.Controllers
             return BadRequest(ModelState);
 
         }
-
-
-      
-
-
-
     }
 }
